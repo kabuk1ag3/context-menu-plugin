@@ -12,7 +12,7 @@ export default class MainMenu extends Menu {
             mouse.y = y;
         });
         
-        for(const component of editor.components.values()) {
+        for (const component of editor.components.values()) {
             const path = allocate(component);
     
             if (Array.isArray(path)) { // add to the menu if path is array
