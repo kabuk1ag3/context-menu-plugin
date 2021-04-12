@@ -95,6 +95,40 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -124,6 +158,42 @@ function _setPrototypeOf(o, p) {
   };
 
   return _setPrototypeOf(o, p);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
 }
 
 function _assertThisInitialized(self) {
@@ -1137,7 +1207,7 @@ var NodeMenu =
 function (_Menu) {
   _inherits(NodeMenu, _Menu);
 
-  function NodeMenu(editor, props, vueComponent, nodeItems) {
+  function NodeMenu(editor, props, vueComponent, nodeItems, renameNodeMenu) {
     var _this;
 
     _classCallCheck(this, NodeMenu);
@@ -1145,22 +1215,53 @@ function (_Menu) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NodeMenu).call(this, editor, props, vueComponent));
 
     if (nodeItems['Delete'] !== false) {
-      _this.addItem('Delete', function (_ref) {
+      _this.addItem(renameNodeMenu('Delete'), function (_ref) {
         var node = _ref.node;
         return editor.removeNode(node);
       });
-    } // if (nodeItems['Clone'] !== false) {
-    //     this.addItem('Clone', async (args) => {
-    //         const { name, position: [x, y], ...params } = args.node;
-    //         const component = editor.components.get(name);
-    //         const node = await createNode(component, { ...params, x: x + 10, y: y + 10 });
-    //         editor.addNode(node);
-    //     });
-    // }
+    }
 
+    if (nodeItems['Clone'] !== false) {
+      _this.addItem(renameNodeMenu('Clone'),
+      /*#__PURE__*/
+      function () {
+        var _ref2 = _asyncToGenerator(
+        /*#__PURE__*/
+        regeneratorRuntime.mark(function _callee(args) {
+          var _args$node, name, _args$node$position, x, y, params, component, node;
+
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _args$node = args.node, name = _args$node.name, _args$node$position = _slicedToArray(_args$node.position, 2), x = _args$node$position[0], y = _args$node$position[1], params = _objectWithoutProperties(_args$node, ["name", "position"]);
+                  component = editor.components.get(name);
+                  _context.next = 4;
+                  return createNode(component, _objectSpread({}, params, {
+                    x: x + 10,
+                    y: y + 10
+                  }));
+
+                case 4:
+                  node = _context.sent;
+                  editor.addNode(node);
+
+                case 6:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee, this);
+        }));
+
+        return function (_x) {
+          return _ref2.apply(this, arguments);
+        };
+      }());
+    }
 
     traverse(nodeItems, function (name, func, path) {
-      return _this.addItem(name, func, path);
+      return _this.addItem(renameNodeMenu(name), func, path);
     });
     return _this;
   }
@@ -1189,6 +1290,10 @@ function install(editor, _ref) {
       rename = _ref$rename === void 0 ? function (component) {
     return component.name;
   } : _ref$rename,
+      _ref$renameNodeMenu = _ref.renameNodeMenu,
+      renameNodeMenu = _ref$renameNodeMenu === void 0 ? function (name) {
+    return name;
+  } : _ref$renameNodeMenu,
       _ref$vueComponent = _ref.vueComponent,
       vueComponent = _ref$vueComponent === void 0 ? null : _ref$vueComponent;
   editor.bind('hidecontextmenu');
@@ -1217,7 +1322,7 @@ function install(editor, _ref) {
       menu = new NodeMenu(editor, {
         searchBar: false,
         delay: delay
-      }, vueComponent, isFunction(nodeItems) ? nodeItems(node) : nodeItems);
+      }, vueComponent, isFunction(nodeItems) ? nodeItems(node) : nodeItems, renameNodeMenu);
       menu.show(x, y, {
         node: node
       });
