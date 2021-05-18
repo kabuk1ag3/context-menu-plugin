@@ -18,6 +18,7 @@ function install(editor, {
 }) {
     editor.bind('hidecontextmenu');
     editor.bind('showcontextmenu');
+    editor.bind('nodeclone');
 
     let menu = null;
 
@@ -37,8 +38,8 @@ function install(editor, {
 
         const [x, y] = [e.clientX, e.clientY];
 
-        if(node) {
-            menu = new NodeMenu(editor, { searchBar: false, delay }, vueComponent,  isFunction(nodeItems) ? nodeItems(node) : nodeItems, renameNodeMenu);
+        if (node) {
+            menu = new NodeMenu(editor, { searchBar: false, delay }, vueComponent, isFunction(nodeItems) ? nodeItems(node) : nodeItems, renameNodeMenu);
             menu.show(x, y, { node });
         } else {
             menu = new MainMenu(editor, { searchBar, searchKeep, delay }, vueComponent, { items, allocate, rename });
