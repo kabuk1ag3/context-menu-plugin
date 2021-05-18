@@ -1245,8 +1245,9 @@ function (_Menu) {
                 case 4:
                   node = _context.sent;
                   editor.addNode(node);
+                  editor.trigger('nodeclone');
 
-                case 6:
+                case 7:
                 case "end":
                   return _context.stop();
               }
@@ -1298,6 +1299,7 @@ function install(editor, _ref) {
       vueComponent = _ref$vueComponent === void 0 ? null : _ref$vueComponent;
   editor.bind('hidecontextmenu');
   editor.bind('showcontextmenu');
+  editor.bind('nodeclone');
   var menu = null;
   editor.on('hidecontextmenu', function () {
     if (menu) menu.hide();
