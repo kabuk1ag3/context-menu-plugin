@@ -1251,7 +1251,7 @@ function (_Menu) {
                 case 4:
                   node = _context.sent;
                   editor.addNode(node);
-                  editor.trigger('nodeclone');
+                  editor.trigger('nodeclone', node);
 
                 case 7:
                 case "end":
