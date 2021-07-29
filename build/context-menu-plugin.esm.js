@@ -331,7 +331,7 @@ function _cloneNode() {
   _cloneNode = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(editor, node) {
-    var name, _node$position, x, y, params, component, _node;
+    var name, _node$position, x, y, params, component, nodeFromClone, obj;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -346,11 +346,15 @@ function _cloneNode() {
             }));
 
           case 4:
-            _node = _context2.sent;
-            editor.addNode(_node);
-            editor.trigger('nodeclone', _node);
+            nodeFromClone = _context2.sent;
+            editor.addNode(nodeFromClone);
+            obj = {
+              node: node,
+              nodeFromClone: nodeFromClone
+            };
+            editor.trigger('nodeclone', obj);
 
-          case 7:
+          case 8:
           case "end":
             return _context2.stop();
         }
