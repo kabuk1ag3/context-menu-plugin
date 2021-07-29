@@ -46,4 +46,6 @@ export async function cloneNode(editor, node, isTrigger) {
     if (isTrigger) { // トリガーを無効化することでイベント内でさらにクローンしたとき無限ループを防げる
       editor.trigger('nodeclone', obj);
     }
+    
+    return nodeFromClone;
 }
