@@ -3,6 +3,6 @@ services:
   app:
     build: .
     volumes:
-      - ./:/app/sine
-    working_dir: /app/sine
-    container_name: sine
+      - ./:/app/context-menu-plugin
+    working_dir: /app/context-menu-plugin
+    container_name: context-menu-plugin
