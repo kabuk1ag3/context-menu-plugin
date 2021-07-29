@@ -37,6 +37,11 @@ export async function cloneNode(editor, node) {
     const nodeFromClone = await createNode(component, { ...params, x: x + 10, y: y + 10 });
 
     editor.addNode(nodeFromClone);
-
-    editor.trigger('nodeclone', { node, nodeFromClone });
+    
+    const obj = { 
+      node: node,
+      nodeFromClone: nodeFromClone,
+    };
+    
+    editor.trigger('nodeclone', obj);
 }
