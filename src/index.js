@@ -4,6 +4,7 @@ import VueItem from './menu/Item.vue';
 import VueMenu from './menu/Menu.vue';
 import VueSearch from './menu/Search.vue';
 import { isFunction } from 'lodash-es';
+import { cloneNode } from './utils';
 
 function install(editor, {
     searchBar = true,
@@ -54,5 +55,6 @@ export const Search = VueSearch;
 
 export default {
     name: 'context-menu',
-    install
+    install,
+    cloneNode,
 }

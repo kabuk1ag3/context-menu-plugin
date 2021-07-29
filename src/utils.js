@@ -29,3 +29,14 @@ export function fitViewport([x, y], element) {
         Math.min(y, window.innerHeight - element.clientHeight)
     ]
 }
+
+// Cloneを外部から実行できる
+export async function cloneNode(editor, node) {
+    const { name, position: [x, y], ...params } = node;
+    const component = editor.components.get(name);
+    const _node = await createNode(component, { ...params, x: x + 10, y: y + 10 });
+
+    editor.addNode(_node);
+
+    editor.trigger('nodeclone', _node);
+}

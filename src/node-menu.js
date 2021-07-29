@@ -1,5 +1,6 @@
 import Menu from './menu/index';
-import { createNode, traverse } from './utils';
+// import { createNode, traverse, cloneNode } from './utils';
+import { traverse, cloneNode } from './utils';
 
 export default class NodeMenu extends Menu {
     constructor(editor, props, vueComponent, nodeItems, renameNodeMenu) {
@@ -10,13 +11,14 @@ export default class NodeMenu extends Menu {
         }
         if (nodeItems['Clone'] !== false) {
             this.addItem(renameNodeMenu('Clone'), async (args) => {
-                const { name, position: [x, y], ...params } = args.node;
-                const component = editor.components.get(name);
-                const node = await createNode(component, { ...params, x: x + 10, y: y + 10 });
+                // const { name, position: [x, y], ...params } = args.node;
+                // const component = editor.components.get(name);
+                // const node = await createNode(component, { ...params, x: x + 10, y: y + 10 });
 
-                editor.addNode(node);
+                // editor.addNode(node);
                 
-                editor.trigger('nodeclone', node);
+                // editor.trigger('nodeclone', node);
+                cloneNode(editor, args.node);
             });
         }
 
