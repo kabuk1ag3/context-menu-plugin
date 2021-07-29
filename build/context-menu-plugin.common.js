@@ -364,7 +364,9 @@ function _cloneNode() {
               editor.trigger('nodeclone', obj);
             }
 
-          case 8:
+            return _context2.abrupt("return", nodeFromClone);
+
+          case 9:
           case "end":
             return _context2.stop();
         }
