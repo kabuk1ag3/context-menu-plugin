@@ -38,5 +38,5 @@ export async function cloneNode(editor, node) {
 
     editor.addNode(nodeFromClone);
 
-    editor.trigger('nodeclone', node, nodeFromClone);
+    editor.trigger('nodeclone', { node, nodeFromClone });
 }
