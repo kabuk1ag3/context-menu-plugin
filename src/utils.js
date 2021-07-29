@@ -34,9 +34,9 @@ export function fitViewport([x, y], element) {
 export async function cloneNode(editor, node) {
     const { name, position: [x, y], ...params } = node;
     const component = editor.components.get(name);
-    const _node = await createNode(component, { ...params, x: x + 10, y: y + 10 });
+    const nodeFromClone = await createNode(component, { ...params, x: x + 10, y: y + 10 });
 
-    editor.addNode(_node);
+    editor.addNode(nodeFromClone);
 
-    editor.trigger('nodeclone', _node);
+    editor.trigger('nodeclone', node, nodeFromClone);
 }
