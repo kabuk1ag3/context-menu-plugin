@@ -31,7 +31,7 @@ export function fitViewport([x, y], element) {
 }
 
 // Cloneを外部から実行できる
-export async function cloneNode(editor, node) {
+export async function cloneNode(editor, node, isTrigger) {
     const { name, position: [x, y], ...params } = node;
     const component = editor.components.get(name);
     const nodeFromClone = await createNode(component, { ...params, x: x + 10, y: y + 10 });
@@ -43,5 +43,7 @@ export async function cloneNode(editor, node) {
       nodeFromClone: nodeFromClone,
     };
     
-    editor.trigger('nodeclone', obj);
+    if (isTrigger) { // トリガーを無効化することでイベント内でさらにクローンしたとき無限ループを防げる
+      editor.trigger('nodeclone', obj);
+    }
 }

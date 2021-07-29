@@ -323,14 +323,14 @@ function fitViewport(_ref2, element) {
   return [Math.min(x, window.innerWidth - element.clientWidth), Math.min(y, window.innerHeight - element.clientHeight)];
 } // Cloneを外部から実行できる
 
-function cloneNode(_x3, _x4) {
+function cloneNode(_x3, _x4, _x5) {
   return _cloneNode.apply(this, arguments);
 }
 
 function _cloneNode() {
   _cloneNode = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(editor, node) {
+  regeneratorRuntime.mark(function _callee2(editor, node, isTrigger) {
     var name, _node$position, x, y, params, component, nodeFromClone, obj;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -352,7 +352,11 @@ function _cloneNode() {
               node: node,
               nodeFromClone: nodeFromClone
             };
-            editor.trigger('nodeclone', obj);
+
+            if (isTrigger) {
+              // トリガーを無効化することでイベント内でさらにクローンしたとき無限ループを防げる
+              editor.trigger('nodeclone', obj);
+            }
 
           case 8:
           case "end":
@@ -1278,7 +1282,7 @@ function (_Menu) {
                   // const node = await createNode(component, { ...params, x: x + 10, y: y + 10 });
                   // editor.addNode(node);
                   // editor.trigger('nodeclone', node);
-                  cloneNode(editor, args.node);
+                  cloneNode(editor, args.node, true);
 
                 case 1:
                 case "end":

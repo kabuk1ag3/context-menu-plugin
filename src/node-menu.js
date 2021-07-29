@@ -18,7 +18,7 @@ export default class NodeMenu extends Menu {
                 // editor.addNode(node);
                 
                 // editor.trigger('nodeclone', node);
-                cloneNode(editor, args.node);
+                cloneNode(editor, args.node, true);
             });
         }
 
