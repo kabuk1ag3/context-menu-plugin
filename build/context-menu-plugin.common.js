@@ -327,6 +327,43 @@ function fitViewport(_ref2, element) {
       y = _ref3[1];
 
   return [Math.min(x, window.innerWidth - element.clientWidth), Math.min(y, window.innerHeight - element.clientHeight)];
+} // Cloneを外部から実行できる
+
+function cloneNode(_x3, _x4) {
+  return _cloneNode.apply(this, arguments);
+}
+
+function _cloneNode() {
+  _cloneNode = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(editor, node) {
+    var name, _node$position, x, y, params, component, _node;
+
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            name = node.name, _node$position = _slicedToArray(node.position, 2), x = _node$position[0], y = _node$position[1], params = _objectWithoutProperties(node, ["name", "position"]);
+            component = editor.components.get(name);
+            _context2.next = 4;
+            return createNode(component, _objectSpread({}, params, {
+              x: x + 10,
+              y: y + 10
+            }));
+
+          case 4:
+            _node = _context2.sent;
+            editor.addNode(_node);
+            editor.trigger('nodeclone', _node);
+
+          case 7:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, this);
+  }));
+  return _cloneNode.apply(this, arguments);
 }
 
 var hideMixin = (function (hideMethod) {
@@ -444,11 +481,11 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-3cf1e4d3_0", { source: "\n@charset \"UTF-8\";\n.item[data-v-3cf1e4d3], .item .subitems .subitem[data-v-3cf1e4d3] {\n  color: #fff;\n  padding: 4px;\n  border-bottom: 1px solid rgba(69, 103, 255, 0.8);\n  background-color: rgba(110, 136, 255, 0.8);\n  cursor: pointer;\n  width: 100%;\n  position: relative;\n}\n.item[data-v-3cf1e4d3]:first-child, .item .subitems .subitem[data-v-3cf1e4d3]:first-child {\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.item[data-v-3cf1e4d3]:last-child, .item .subitems .subitem[data-v-3cf1e4d3]:last-child {\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\n.item[data-v-3cf1e4d3]:hover, .item .subitems .subitem[data-v-3cf1e4d3]:hover {\n    background-color: rgba(130, 153, 255, 0.8);\n}\n.hasSubitems.item[data-v-3cf1e4d3]:after, .item .subitems .hasSubitems.subitem[data-v-3cf1e4d3]:after {\n  content: '►';\n  position: absolute;\n  opacity: 0.6;\n  right: 5px;\n  top: 5px;\n}\n.item .subitems[data-v-3cf1e4d3], .item .subitems .subitem .subitems[data-v-3cf1e4d3] {\n  position: absolute;\n  top: 0;\n  left: 100%;\n  width: 120px;\n}\n\n/*# sourceMappingURL=Item.vue.map */", map: {"version":3,"sources":["Item.vue","C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin/C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin/C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin\\src\\menu\\Item.vue"],"names":[],"mappings":";AAAA,iBAAiB;ACyDjB;EDvDE,YAAY;EACZ,aAAa;EACb,iDAAiD;EACjD,2CAA2C;EAC3C,gBAAgB;EAChB,YAAY;EACZ,mBAAmB;CAAE;ACiDvB;ID/CI,4BAA4B;IAC5B,6BAA6B;CAAE;AC8CnC;ID5CI,+BAA+B;IAC/B,gCAAgC;CAAE;AC2CtC;IDzCI,2CAA2C;CAAE;AC2CjD;EACA,aAAA;EACA,mBAAA;EACA,aAAA;EACA,WAAA;EACA,SAAA;CAAA;AAPA;EASA,mBAAA;EACA,OAAA;EACA,WAAA;EACA,aAAA;CAEA;;ADxCA,oCAAoC","file":"Item.vue","sourcesContent":["@charset \"UTF-8\";\n.item, .item .subitems .subitem {\n  color: #fff;\n  padding: 4px;\n  border-bottom: 1px solid rgba(69, 103, 255, 0.8);\n  background-color: rgba(110, 136, 255, 0.8);\n  cursor: pointer;\n  width: 100%;\n  position: relative; }\n  .item:first-child, .item .subitems .subitem:first-child {\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px; }\n  .item:last-child, .item .subitems .subitem:last-child {\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px; }\n  .item:hover, .item .subitems .subitem:hover {\n    background-color: rgba(130, 153, 255, 0.8); }\n\n.hasSubitems.item:after, .item .subitems .hasSubitems.subitem:after {\n  content: '►';\n  position: absolute;\n  opacity: 0.6;\n  right: 5px;\n  top: 5px; }\n\n.item .subitems, .item .subitems .subitem .subitems {\n  position: absolute;\n  top: 0;\n  left: 100%;\n  width: 120px; }\n\n/*# sourceMappingURL=Item.vue.map */",null]}, media: undefined });
+    inject("data-v-e4b8013e_0", { source: "\n@charset \"UTF-8\";\n.item[data-v-e4b8013e], .item .subitems .subitem[data-v-e4b8013e] {\n  color: #fff;\n  padding: 4px;\n  border-bottom: 1px solid rgba(69, 103, 255, 0.8);\n  background-color: rgba(110, 136, 255, 0.8);\n  cursor: pointer;\n  width: 100%;\n  position: relative;\n}\n.item[data-v-e4b8013e]:first-child, .item .subitems .subitem[data-v-e4b8013e]:first-child {\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.item[data-v-e4b8013e]:last-child, .item .subitems .subitem[data-v-e4b8013e]:last-child {\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\n.item[data-v-e4b8013e]:hover, .item .subitems .subitem[data-v-e4b8013e]:hover {\n    background-color: rgba(130, 153, 255, 0.8);\n}\n.hasSubitems.item[data-v-e4b8013e]:after, .item .subitems .hasSubitems.subitem[data-v-e4b8013e]:after {\n  content: '►';\n  position: absolute;\n  opacity: 0.6;\n  right: 5px;\n  top: 5px;\n}\n.item .subitems[data-v-e4b8013e], .item .subitems .subitem .subitems[data-v-e4b8013e] {\n  position: absolute;\n  top: 0;\n  left: 100%;\n  width: 120px;\n}\n\n/*# sourceMappingURL=Item.vue.map */", map: {"version":3,"sources":["Item.vue","/workspace/src/menu/Item.vue"],"names":[],"mappings":";AAAA,iBAAiB;ACyDjB;EDvDE,YAAY;EACZ,aAAa;EACb,iDAAiD;EACjD,2CAA2C;EAC3C,gBAAgB;EAChB,YAAY;EACZ,mBAAmB;CAAE;ACiDvB;ID/CI,4BAA4B;IAC5B,6BAA6B;CAAE;AC8CnC;ID5CI,+BAA+B;IAC/B,gCAAgC;CAAE;AC2CtC;IDzCI,2CAA2C;CAAE;AC2CjD;EACA,aAAA;EACA,mBAAA;EACA,aAAA;EACA,WAAA;EACA,SAAA;CAAA;AAPA;EASA,mBAAA;EACA,OAAA;EACA,WAAA;EACA,aAAA;CAEA;;ADxCA,oCAAoC","file":"Item.vue","sourcesContent":["@charset \"UTF-8\";\n.item, .item .subitems .subitem {\n  color: #fff;\n  padding: 4px;\n  border-bottom: 1px solid rgba(69, 103, 255, 0.8);\n  background-color: rgba(110, 136, 255, 0.8);\n  cursor: pointer;\n  width: 100%;\n  position: relative; }\n  .item:first-child, .item .subitems .subitem:first-child {\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px; }\n  .item:last-child, .item .subitems .subitem:last-child {\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px; }\n  .item:hover, .item .subitems .subitem:hover {\n    background-color: rgba(130, 153, 255, 0.8); }\n\n.hasSubitems.item:after, .item .subitems .hasSubitems.subitem:after {\n  content: '►';\n  position: absolute;\n  opacity: 0.6;\n  right: 5px;\n  top: 5px; }\n\n.item .subitems, .item .subitems .subitem .subitems {\n  position: absolute;\n  top: 0;\n  left: 100%;\n  width: 120px; }\n\n/*# sourceMappingURL=Item.vue.map */",null]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__ = "data-v-3cf1e4d3";
+  const __vue_scope_id__ = "data-v-e4b8013e";
   /* module identifier */
   const __vue_module_identifier__ = undefined;
   /* functional template */
@@ -462,7 +499,7 @@ __vue_render__._withStripped = true;
     const component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin\\src\\menu\\Item.vue";
+    component.__file = "/workspace/src/menu/Item.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -622,11 +659,11 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-9a859e66_0", { source: "\n.search input[data-v-9a859e66] {\n  color: white;\n  padding: 1px 8px;\n  border: 1px solid white;\n  border-radius: 10px;\n  font-size: 16px;\n  font-family: serif;\n  width: 100%;\n  box-sizing: border-box;\n  background: transparent;\n}\n\n/*# sourceMappingURL=Search.vue.map */", map: {"version":3,"sources":["C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin/C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin/C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin\\src\\menu\\Search.vue","Search.vue"],"names":[],"mappings":";AAkBA;EAEA,aAAA;EACA,iBAAA;EACA,wBAAA;EACA,oBAAA;EACA,gBAAA;EACA,mBAAA;EACA,YAAA;EACA,uBAAA;EACA,wBAAA;CAAA;;ACjBA,sCAAsC","file":"Search.vue","sourcesContent":[null,".search input {\n  color: white;\n  padding: 1px 8px;\n  border: 1px solid white;\n  border-radius: 10px;\n  font-size: 16px;\n  font-family: serif;\n  width: 100%;\n  box-sizing: border-box;\n  background: transparent; }\n\n/*# sourceMappingURL=Search.vue.map */"]}, media: undefined });
+    inject("data-v-f533fa02_0", { source: "\n.search input[data-v-f533fa02] {\n  color: white;\n  padding: 1px 8px;\n  border: 1px solid white;\n  border-radius: 10px;\n  font-size: 16px;\n  font-family: serif;\n  width: 100%;\n  box-sizing: border-box;\n  background: transparent;\n}\n\n/*# sourceMappingURL=Search.vue.map */", map: {"version":3,"sources":["/workspace/src/menu/Search.vue","Search.vue"],"names":[],"mappings":";AAkBA;EAEA,aAAA;EACA,iBAAA;EACA,wBAAA;EACA,oBAAA;EACA,gBAAA;EACA,mBAAA;EACA,YAAA;EACA,uBAAA;EACA,wBAAA;CAAA;;ACjBA,sCAAsC","file":"Search.vue","sourcesContent":[null,".search input {\n  color: white;\n  padding: 1px 8px;\n  border: 1px solid white;\n  border-radius: 10px;\n  font-size: 16px;\n  font-family: serif;\n  width: 100%;\n  box-sizing: border-box;\n  background: transparent; }\n\n/*# sourceMappingURL=Search.vue.map */"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$1 = "data-v-9a859e66";
+  const __vue_scope_id__$1 = "data-v-f533fa02";
   /* module identifier */
   const __vue_module_identifier__$1 = undefined;
   /* functional template */
@@ -640,7 +677,7 @@ __vue_render__$1._withStripped = true;
     const component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin\\src\\menu\\Search.vue";
+    component.__file = "/workspace/src/menu/Search.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -940,11 +977,11 @@ __vue_render__$2._withStripped = true;
   /* style */
   const __vue_inject_styles__$2 = function (inject) {
     if (!inject) return
-    inject("data-v-2bd5ab5b_0", { source: "\n.item[data-v-2bd5ab5b], .context-menu .search[data-v-2bd5ab5b] {\n  color: #fff;\n  padding: 4px;\n  border-bottom: 1px solid rgba(69, 103, 255, 0.8);\n  background-color: rgba(110, 136, 255, 0.8);\n  cursor: pointer;\n  width: 100%;\n  position: relative;\n}\n.item[data-v-2bd5ab5b]:first-child, .context-menu .search[data-v-2bd5ab5b]:first-child {\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.item[data-v-2bd5ab5b]:last-child, .context-menu .search[data-v-2bd5ab5b]:last-child {\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\n.item[data-v-2bd5ab5b]:hover, .context-menu .search[data-v-2bd5ab5b]:hover {\n    background-color: rgba(130, 153, 255, 0.8);\n}\n.context-menu[data-v-2bd5ab5b] {\n  left: 0;\n  top: 0;\n  position: fixed;\n  padding: 10px;\n  width: 120px;\n  margin-top: -20px;\n  margin-left: -60px;\n}\n\n/*# sourceMappingURL=Menu.vue.map */", map: {"version":3,"sources":["Menu.vue","C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin/C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin/C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin\\src\\menu\\Menu.vue"],"names":[],"mappings":";AAAA;EACE,YAAY;EACZ,aAAa;EACb,iDAAiD;EACjD,2CAA2C;EAC3C,gBAAgB;EAChB,YAAY;EACZ,mBAAmB;CAAE;AACrB;IACE,4BAA4B;IAC5B,6BAA6B;CAAE;AACjC;IACE,+BAA+B;IAC/B,gCAAgC;CAAE;AACpC;IACE,2CAA2C;CAAE;ACwGjD;EACA,QAAA;EACA,OAAA;EACA,gBAAA;EACA,cAAA;EACA,aAAA;EACA,kBAAA;EACA,mBAAA;CAEA;;ADtGA,oCAAoC","file":"Menu.vue","sourcesContent":[".item, .context-menu .search {\n  color: #fff;\n  padding: 4px;\n  border-bottom: 1px solid rgba(69, 103, 255, 0.8);\n  background-color: rgba(110, 136, 255, 0.8);\n  cursor: pointer;\n  width: 100%;\n  position: relative; }\n  .item:first-child, .context-menu .search:first-child {\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px; }\n  .item:last-child, .context-menu .search:last-child {\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px; }\n  .item:hover, .context-menu .search:hover {\n    background-color: rgba(130, 153, 255, 0.8); }\n\n.context-menu {\n  left: 0;\n  top: 0;\n  position: fixed;\n  padding: 10px;\n  width: 120px;\n  margin-top: -20px;\n  margin-left: -60px; }\n\n/*# sourceMappingURL=Menu.vue.map */",null]}, media: undefined });
+    inject("data-v-b079f32e_0", { source: "\n.item[data-v-b079f32e], .context-menu .search[data-v-b079f32e] {\n  color: #fff;\n  padding: 4px;\n  border-bottom: 1px solid rgba(69, 103, 255, 0.8);\n  background-color: rgba(110, 136, 255, 0.8);\n  cursor: pointer;\n  width: 100%;\n  position: relative;\n}\n.item[data-v-b079f32e]:first-child, .context-menu .search[data-v-b079f32e]:first-child {\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px;\n}\n.item[data-v-b079f32e]:last-child, .context-menu .search[data-v-b079f32e]:last-child {\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px;\n}\n.item[data-v-b079f32e]:hover, .context-menu .search[data-v-b079f32e]:hover {\n    background-color: rgba(130, 153, 255, 0.8);\n}\n.context-menu[data-v-b079f32e] {\n  left: 0;\n  top: 0;\n  position: fixed;\n  padding: 10px;\n  width: 120px;\n  margin-top: -20px;\n  margin-left: -60px;\n}\n\n/*# sourceMappingURL=Menu.vue.map */", map: {"version":3,"sources":["Menu.vue","/workspace/src/menu/Menu.vue"],"names":[],"mappings":";AAAA;EACE,YAAY;EACZ,aAAa;EACb,iDAAiD;EACjD,2CAA2C;EAC3C,gBAAgB;EAChB,YAAY;EACZ,mBAAmB;CAAE;AACrB;IACE,4BAA4B;IAC5B,6BAA6B;CAAE;AACjC;IACE,+BAA+B;IAC/B,gCAAgC;CAAE;AACpC;IACE,2CAA2C;CAAE;ACwGjD;EACA,QAAA;EACA,OAAA;EACA,gBAAA;EACA,cAAA;EACA,aAAA;EACA,kBAAA;EACA,mBAAA;CAEA;;ADtGA,oCAAoC","file":"Menu.vue","sourcesContent":[".item, .context-menu .search {\n  color: #fff;\n  padding: 4px;\n  border-bottom: 1px solid rgba(69, 103, 255, 0.8);\n  background-color: rgba(110, 136, 255, 0.8);\n  cursor: pointer;\n  width: 100%;\n  position: relative; }\n  .item:first-child, .context-menu .search:first-child {\n    border-top-left-radius: 5px;\n    border-top-right-radius: 5px; }\n  .item:last-child, .context-menu .search:last-child {\n    border-bottom-left-radius: 5px;\n    border-bottom-right-radius: 5px; }\n  .item:hover, .context-menu .search:hover {\n    background-color: rgba(130, 153, 255, 0.8); }\n\n.context-menu {\n  left: 0;\n  top: 0;\n  position: fixed;\n  padding: 10px;\n  width: 120px;\n  margin-top: -20px;\n  margin-left: -60px; }\n\n/*# sourceMappingURL=Menu.vue.map */",null]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$2 = "data-v-2bd5ab5b";
+  const __vue_scope_id__$2 = "data-v-b079f32e";
   /* module identifier */
   const __vue_module_identifier__$2 = undefined;
   /* functional template */
@@ -958,7 +995,7 @@ __vue_render__$2._withStripped = true;
     const component = (typeof script === 'function' ? script.options : script) || {};
 
     // For security concerns, we use only base name in production mode.
-    component.__file = "C:\\Users\\nizimasu\\Documents\\Me\\MyProjects\\Editors\\VSCode\\Node\\sine_project\\context-menu-plugin\\src\\menu\\Menu.vue";
+    component.__file = "/workspace/src/menu/Menu.vue";
 
     if (!component.render) {
       component.render = template.render;
@@ -1234,26 +1271,18 @@ function (_Menu) {
         var _ref2 = _asyncToGenerator(
         /*#__PURE__*/
         regeneratorRuntime.mark(function _callee(args) {
-          var _args$node, name, _args$node$position, x, y, params, component, node;
-
           return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _args$node = args.node, name = _args$node.name, _args$node$position = _slicedToArray(_args$node.position, 2), x = _args$node$position[0], y = _args$node$position[1], params = _objectWithoutProperties(_args$node, ["name", "position"]);
-                  component = editor.components.get(name);
-                  _context.next = 4;
-                  return createNode(component, _objectSpread({}, params, {
-                    x: x + 10,
-                    y: y + 10
-                  }));
+                  // const { name, position: [x, y], ...params } = args.node;
+                  // const component = editor.components.get(name);
+                  // const node = await createNode(component, { ...params, x: x + 10, y: y + 10 });
+                  // editor.addNode(node);
+                  // editor.trigger('nodeclone', node);
+                  cloneNode(editor, args.node);
 
-                case 4:
-                  node = _context.sent;
-                  editor.addNode(node);
-                  editor.trigger('nodeclone', node);
-
-                case 7:
+                case 1:
                 case "end":
                   return _context.stop();
               }
@@ -1354,7 +1383,8 @@ var Item$1 = Item;
 var Search$1 = Search;
 var index = {
   name: 'context-menu',
-  install: install
+  install: install,
+  cloneNode: cloneNode
 };
 
 exports.Menu = Menu$1;
